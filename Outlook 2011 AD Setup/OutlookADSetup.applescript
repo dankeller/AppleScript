@@ -37,73 +37,28 @@ Default script with custom settings
 ----------------------------------------------------------------------------------------------------------
 -- Settings: Edit these for your environment
 
-property domainName : "domain.com"
--- example: "domain.com"
+property domainName : "domain.com" -- example: "domain.com"
 
-property ExchangeServer : "mail.domain.com"
--- example: "mail.domain.com"
-
-property ExchangeDomain : ""
--- if you need to type a domain and backslash before your login name for the Exchange server.
--- escape the backslash with another:	"DOMAIN\\"
-
+property ExchangeServer : "mail.domain.com" -- example: "mail.domain.com"
 property ExchangeServerRequiresSSL : true
+property ExchangeServerSSLPort : 443 -- if ExchangeServerSSL is true: 443; false: 80
 
-property ExchangeServerSSLPort : 443
--- If ExchangeServerSSL is true set the port to 443
--- If ExchangeServerSSL is false set the port to 80
-
-property directoryServer : "ldap.domain.com"
--- example: "ldap.domain.com"
-
-property directoryServerRequiresAuthentication : true
-
+property directoryServer : "ldap.domain.com" -- example: "ldap.domain.com"
+property directoryServerRequiresAuth : true
 property directoryServerRequiresSSL : false
-
-property directoryServerSSLPort : 3268
--- If directoryServerRequiresSSL is false set the port to 3268
--- If directoryServerRequiresSSL is true set the port to 3269
-
+property directoryServerSSLPort : 3268 -- if directoryServerRequiresSSL is false: 3268; true: 3269
 property directoryServerMaximumResults : 6000
+property directoryServerSearchBase : "" -- example: "cn=users,dc=domain,dc=com" -- search base will be optional in many environments and its format will vary greatly. Experiment first connecting without entering the search base information.
 
-property directoryServerSearchBase : ""
--- example: "cn=users,dc=domain,dc=com"
+property dsclDomain : "/Active Directory/DOMAIN/All Domains/" -- The specific domain for use by dscl
 
--- Search base will be optional in many environments and its
--- format will vary greatly. Experiment first connecting without
--- entering the search base information.
-
-property getUserInfoUsingDSCL : true
--- If the Macs are connected to a directory service such as
--- Active Directory, then they can probably use dscl to return
--- the current user's E-mail address instead of trying to parse it
--- from the display name. 
-
--- Using dscl is preferred. Otherwise, set this to false
--- and set the next property to the appropriate number.
-
-property dsclDomain : "/Active Directory/DOMAIN/All Domains/"
--- The specific domain for use by dscl
-
-property displayName : 1
--- Assuming the name comes from AD as: "Last, First"
--- This may need some tweaking otherwise
+property displayName : 1 -- Assuming the name comes from AD as: "Last, First", this may need some tweaking otherwise
 -- 1: Display name displays as "Last, First"
 -- 2: Display name displays as "First Last"
 
-property mailboxPrefix : ""
--- Enter a prefix to the mailbox name if desired
--- example: "Mailbox - " with displayName set to 2 would name the account "Mailbox - Jane User"
-
-property scheduled : false
--- Exchange accounts don't require that
--- the "Send & Receive All" schedule be enabled.
--- Change this setting to true if the user
--- will also be connecting to POP or IMAP accounts.
-
+property mailboxPrefix : "" -- example: "Mailbox - " with displayName set to 2 would name the account "Mailbox - Jane User"
+property scheduled : false -- Exchange accounts don't require that the "Send & Receive All" schedule be enabled.
 property errorMessage : "Your account may not have set up correctly. Please contact tech support with questions."
--- Customize this error message for your users
--- if their account setup fails
 
 -- End settings
 ----------------------------------------------------------------------------------------------------------
